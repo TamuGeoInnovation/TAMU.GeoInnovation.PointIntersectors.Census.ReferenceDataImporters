@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <!--  <UsingTask TaskName="USC.GISResearchLab.Common.BuildTasks.AutoIncrementBuildNumber" AssemblyFile="USC.GISResearchLab.Common.BuildTasks.dll" /> -->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B43824AD-2F49-4DA4-AC78-4BAC8BDC6E9F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TAMU.GeoInnovation.PointIntersectors.Census.ReferenceDataImporters</RootNamespace>
+    <AssemblyName>TAMU.GeoInnovation.PointIntersectors.Census.ReferenceDataImporters</AssemblyName>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\build\1.0.0\AnyCPU\debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\build\1.0.0\AnyCPU\release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\build\v1.0\bin\x86\debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>..\build\v1.0\bin\x86\release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\..\..\..\..\..\..\DevDependencies\SharpZip\SharpZipLib_0854_Bin\net-20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Microsoft SQL Server\100\SDK\Assemblies\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLSpatialTools">
+      <HintPath>..\..\..\..\..\..\..\DevDependencies\SQLServer\SQLSpatialTools\build\v1.0\bin\AnyCPU\release\SQLSpatialTools.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TAMU.GeoInnovation.AddressProcessing.Core">
+      <HintPath>..\..\..\..\..\..\..\DevBuild\Tamu\GeoInnovation\AddressProcessing\AddressProcessing.Core\build\2.9.3\release\TAMU.GeoInnovation.AddressProcessing.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Tamu.GeoInnovation.Common.Core.Files">
+      <HintPath>..\..\..\..\..\..\..\DevBuild\Tamu\GeoInnovation\Common\Core\Files\build\1.0.0\release\Tamu.GeoInnovation.Common.Core.Files.dll</HintPath>
+    </Reference>
+    <Reference Include="Tamu.GeoInnovation.Common.Core.Logging.TraceEvents">
+      <HintPath>..\..\..\..\..\..\..\DevBuild\Tamu\GeoInnovation\Common\Core\Logging.TraceEvents\build\1.0.0\release\Tamu.GeoInnovation.Common.Core.Logging.TraceEvents.dll</HintPath>
+    </Reference>
+    <Reference Include="Tamu.GeoInnovation.Common.Core.Threading">
+      <HintPath>..\..\..\..\..\..\..\DevBuild\Tamu\GeoInnovation\Common\Core\Threading\build\1.0.0\release\Tamu.GeoInnovation.Common.Core.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="Tamu.GeoInnovation.Common.Core.Utils">
+      <HintPath>..\..\..\..\..\..\..\DevBuild\Tamu\GeoInnovation\Common\Core\Utils\build\1.0.0\release\Tamu.GeoInnovation.Common.Core.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="Tamu.GeoInnovation.Common.Data.Databases">
+      <HintPath>..\..\..\..\..\..\..\DevBuild\Tamu\GeoInnovation\Common\Data\Databases\build\1.0.0\release\Tamu.GeoInnovation.Common.Data.Databases.dll</HintPath>
+    </Reference>
+    <Reference Include="Tamu.GeoInnovation.GeoReferences.DataImporters.Census">
+      <HintPath>..\..\..\..\..\..\..\DevBuild\Tamu\GeoInnovation\GeoReferences\DataImporters\Census\build\1.0.0\release\Tamu.GeoInnovation.GeoReferences.DataImporters.Census.dll</HintPath>
+    </Reference>
+    <Reference Include="Tamu.GeoInnovation.ShapefileReaders.Catfood.ShapefileReaderWrapper">
+      <HintPath>..\..\..\..\..\..\..\DevBuild\Tamu\GeoInnovation\ShapefileReaders\Catfood.ShapefileReaderWrapper\build\1.0.0\release\Tamu.GeoInnovation.ShapefileReaders.Catfood.ShapefileReaderWrapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Tamu.GeoInnovation.ShapefileReaders.Reimers.Shp2KmlWrapper">
+      <HintPath>..\..\..\..\..\..\..\DevBuild\Tamu\GeoInnovation\ShapefileReaders\Reimers.Shp2KmlWrapper\build\1.0.0\release\Tamu.GeoInnovation.ShapefileReaders.Reimers.Shp2KmlWrapper.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationStates\Managers\StatusManager.cs" />
+    <Compile Include="ApplicationStates\Managers\TransactionManager.cs" />
+    <Compile Include="FileLayouts\AbstractClasses\AbstractTigerShapefileFileLayout.cs" />
+    <Compile Include="FileLayouts\AbstractClasses\AbstractTigerFileLayout.cs" />
+    <Compile Include="FileLayouts\AbstractClasses\AbstractTigerShapefileFileLayout_Old.cs" />
+    <Compile Include="FileLayouts\AbstractClasses\Tiger2010\CountryFiles\AbstractTiger2010CountryFileLayout.cs" />
+    <Compile Include="FileLayouts\AbstractClasses\Tiger2010\CountryFiles\AbstractTiger2010ShapefileCountryFileLayout.cs" />
+    <Compile Include="FileLayouts\AbstractClasses\Tiger2010\StateFiles\AbstractTiger2010ShapefileStateFileLayout.cs" />
+    <Compile Include="FileLayouts\AbstractClasses\Tiger2010\StateFiles\AbstractTiger2010StateFileLayout.cs" />
+    <Compile Include="FileLayouts\AbstractClasses\Tiger2000\CountryFiles\AbstractTiger2000CountryFileLayout.cs" />
+    <Compile Include="FileLayouts\AbstractClasses\Tiger2000\CountryFiles\AbstractTiger2000ShapefileCountryFileLayout.cs" />
+    <Compile Include="FileLayouts\AbstractClasses\Tiger2000\StateFiles\AbstractTiger2000ShapefileStateFileLayout.cs" />
+    <Compile Include="FileLayouts\AbstractClasses\Tiger2000\StateFiles\AbstractTiger2000StateFileLayout.cs" />
+    <Compile Include="FileLayouts\AbstractClasses\Tiger1990\StateFiles\AbstractTiger1990FileLayout.cs" />
+    <Compile Include="FileLayouts\AbstractClasses\Tiger1990\StateFiles\AbstractTiger1990ShapefileFileLayout.cs" />
+    <Compile Include="FileLayouts\AbstractClasses\Tiger1990\StateFiles\AbstractTiger1990ShapefileStateFileLayout.cs" />
+    <Compile Include="FileLayouts\AbstractClasses\Tiger1990\StateFiles\AbstractTiger1990StateFileLayout.cs" />
+    <Compile Include="FileLayouts\Delegates\Delegates.cs" />
+    <Compile Include="FileLayouts\Factories\Tiger2000\StateFiles\CensusTract2000FileFactory.cs" />
+    <Compile Include="FileLayouts\Factories\Tiger2000\StateFiles\CountySub2000FileFactory.cs" />
+    <Compile Include="FileLayouts\Factories\Tiger2010\CountryFiles\Cbsa2010FileFactory.cs" />
+    <Compile Include="FileLayouts\Factories\Tiger2010\CountryFiles\MetDiv2010FileFactory.cs" />
+    <Compile Include="FileLayouts\Factories\Tiger2010\CountryFiles\County2010FileFactory.cs" />
+    <Compile Include="FileLayouts\Factories\Tiger2010\CountryFiles\States2010FileFactory.cs" />
+    <Compile Include="FileLayouts\Factories\Tiger2010\CountryFiles\Zcta52010FileFactory.cs" />
+    <Compile Include="FileLayouts\Factories\Tiger2010\StateFiles\CensusBlock2010FileFactory.cs" />
+    <Compile Include="FileLayouts\Factories\Tiger2010\StateFiles\ConsolidatedCity2010FileFactory.cs" />
+    <Compile Include="FileLayouts\Factories\Tiger2010\StateFiles\CensusTract2010FileFactory.cs" />
+    <Compile Include="FileLayouts\Factories\Tiger2010\StateFiles\CountySub2010FileFactory.cs" />
+    <Compile Include="FileLayouts\Factories\Tiger2010\StateFiles\Place2010FileFactory.cs" />
+    <Compile Include="FileLayouts\Factories\Tiger1990\StateFiles\CensusTract1990FileFactory.cs" />
+    <Compile Include="FileLayouts\Factories\Tiger2000\CountryFiles\Zcta52000FileFactory.cs" />
+    <Compile Include="FileLayouts\Factories\Tiger2000\CountryFiles\Zcta32000FileFactory.cs" />
+    <Compile Include="FileLayouts\Factories\Tiger2000\CountryFiles\States2000FileFactory.cs" />
+    <Compile Include="FileLayouts\Factories\Tiger2000\CountryFiles\County2000FileFactory.cs" />
+    <Compile Include="FileLayouts\Factories\Tiger2000\StateFiles\CensusBlock2000FileFactory.cs" />
+    <Compile Include="FileLayouts\Factories\Tiger2000\StateFiles\CensusBlockGroup2000FileFactory.cs" />
+    <Compile Include="FileLayouts\Factories\Tiger2000\StateFiles\ConsolidatedCity2000FileFactory.cs" />
+    <Compile Include="FileLayouts\Factories\Tiger2000\StateFiles\Place2000FileFactory.cs" />
+    <Compile Include="FileLayouts\Factories\Tiger2000\StateFiles\County2000FileFactory.cs" />
+    <Compile Include="FileLayouts\Interfaces\ITigerShapefileFileLayout.cs" />
+    <Compile Include="FileLayouts\Interfaces\ITigerFileLayout.cs" />
+    <Compile Include="ProgressStates\CountryLevelImporterProgressState.cs" />
+    <Compile Include="ProgressStates\ProgressState.cs" />
+    <Compile Include="ProgressStates\StateLevelImporterProgressState.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Workers\AbstractClasses\AbstractCountryLevelImporterWorker.cs" />
+    <Compile Include="Workers\AbstractClasses\AbstractImporterWorker.cs" />
+    <Compile Include="Workers\AbstractClasses\AbstractStateLevelImporterWorker.cs" />
+    <Compile Include="Workers\AbstractClasses\AbstractCensusTractLevelImporterWorker.cs" />
+    <Compile Include="Workers\AbstractClasses\AbstractCensusTractLevelIndexUpdaterImporterWorker.cs" />
+    <Compile Include="Workers\AbstractClasses\AbstractCensusTractLevelCountsUpdaterImporterWorker.cs" />
+    <Compile Include="Workers\Factories\CensusTractLevelReferenceImporterFactory.cs" />
+    <Compile Include="Workers\Factories\CensusCountryLevelReferenceImporterFactory.cs" />
+    <Compile Include="Workers\Factories\CensusStateLevelReferenceImporterFactory.cs" />
+    <Compile Include="Workers\Factories\CensusTractLevelCountsUpdaterReferenceImporterFactory.cs" />
+    <Compile Include="Workers\Factories\CensusTractLevelIndexUpdaterReferenceImporterFactory.cs" />
+    <Compile Include="Workers\Implementations\CensusTractLevelImporterWorker_Old.cs" />
+    <Compile Include="Workers\Implementations\CountryLevelImporterWorker.cs" />
+    <Compile Include="Workers\Implementations\StateLevelImporterWorker_Old.cs" />
+    <Compile Include="Workers\Interfaces\ICountryLevelImporterWorker.cs" />
+    <Compile Include="Workers\Interfaces\ICensusTractLevelCountsUpdaterImporterWorker.cs" />
+    <Compile Include="Workers\Interfaces\ICensusTractLevelIndexUpdaterImporterWorker.cs" />
+    <Compile Include="Workers\Interfaces\ICensusTractLevelImporterWorker.cs" />
+    <Compile Include="Workers\Interfaces\IStateLevelImporterWorker.cs" />
+    <Compile Include="Workers\Interfaces\IImporterWorker.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!--  
+  <Target Name="BeforeBuild">
+    <AutoIncrementBuildNumber AssemblyFileLocation="$(MSBuildProjectDirectory)\Properties\AssemblyInfo.cs" ExecuteFileLocation="$(TargetPath)" />
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

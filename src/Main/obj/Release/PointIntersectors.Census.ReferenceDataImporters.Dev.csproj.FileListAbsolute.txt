@@ -1,3 +1,0 @@
-C:\DevSource\Tamu\GeoInnovation\PointIntersectors.Census.ReferenceDataImporters\src\Main\obj\Release\TAMU.GeoInnovation.PointIntersectors.Census.ReferenceDataImporters.dll
-C:\DevSource\Tamu\GeoInnovation\PointIntersectors.Census.ReferenceDataImporters\src\Main\obj\Release\PointIntersectors.Census.ReferenceDataImporters.Dev.csprojResolveAssemblyReference.cache
-C:\DevSource\Tamu\GeoInnovation\PointIntersectors.Census.ReferenceDataImporters\build\1.0.0\AnyCPU\release\TAMU.GeoInnovation.PointIntersectors.Census.ReferenceDataImporters.dll

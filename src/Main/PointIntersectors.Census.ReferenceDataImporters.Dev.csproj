@@ -81,6 +81,9 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Catfood.Shapefile">
+      <HintPath>..\..\libs\Catfood.Shapefile.dll</HintPath>
+    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\..\libs\ICSharpCode.SharpZipLib.dll</HintPath>
       <Private>False</Private>

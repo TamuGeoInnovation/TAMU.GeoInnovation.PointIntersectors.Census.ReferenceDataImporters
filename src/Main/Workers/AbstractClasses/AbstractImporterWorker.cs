@@ -82,11 +82,11 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
         {
             get
             {
-                //if (_QueryManager == null)
-                //{
-                //    _QueryManager = new QueryManager(ApplicationPathToDatabaseDlls, ApplicationDataProviderType, ApplicationDatabaseType, ApplicationConnectionString);
-                //}
-                return _QueryManager.Clone();
+                if (_QueryManager == null)
+                {
+                    _QueryManager = new QueryManager(ApplicationPathToDatabaseDlls, ApplicationDataProviderType, ApplicationDatabaseType, ApplicationConnectionString);
+                }
+                return _QueryManager;
             }
         }
 
@@ -95,11 +95,11 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
         {
             get
             {
-                //if (_SchemaManager == null)
-                //{
-                //    _SchemaManager = new SchemaManager(ApplicationPathToDatabaseDlls, ApplicationDataProviderType, ApplicationDatabaseType, ApplicationConnectionString);
-                //}
-                return (ISchemaManager)_SchemaManager.Clone();
+                if (_SchemaManager == null)
+                {
+                    _SchemaManager = new SchemaManager(ApplicationPathToDatabaseDlls, ApplicationDataProviderType, ApplicationDatabaseType, ApplicationConnectionString);
+                }
+                return _SchemaManager;
             }
         }
 
@@ -232,9 +232,11 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
 
             try
             {
+                SchemaManager.QueryManager.Connection.Open();
+
                 if (dropFirst)
-                { 
-                    
+                {
+
                     //sql += "exec utility$removeRelationships @parent_table_name = '" + tigerFile.OutputTableName + "'";
                     //qm.ExecuteNonQuery(CommandType.Text, sql, true);
 
@@ -256,11 +258,37 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                 //sql += " IF NOT EXISTS (SELECT * FROM sysobjects WHERE type = 'U' AND name = '" + tigerFile.OutputTableName + "') ";
                 //sql += tigerFile.SQLCreateTable;
 
-                SchemaManager.AddTableToDatabase(tigerFile.OutputTableName, tigerFile.SQLCreateTable);
+                SchemaManager.AddTableToDatabase(tigerFile.OutputTableName, tigerFile.SQLCreateTable, false);
             }
             catch (Exception e)
             {
-                throw new Exception("Error occured in CreateStateTigerTable: " + e.Message, e);
+                string msg = "Error occured in CreateStateTigerTable: " + e.Message;
+
+
+                if (TraceSource != null)
+                {
+                    TraceSource.TraceEvent(TraceEventType.Error, (int)ExceptionEvents.ExceptionOccurred, msg);
+                }
+
+                if (SchemaManager.QueryManager.Connection != null)
+                {
+                    if (SchemaManager.QueryManager.Connection.State != ConnectionState.Closed)
+                    {
+                        SchemaManager.QueryManager.Close();
+                    }
+                }
+
+                throw new Exception(msg, e);
+            }
+            finally
+            {
+                if (SchemaManager.QueryManager.Connection != null)
+                {
+                    if (SchemaManager.QueryManager.Connection.State != ConnectionState.Closed)
+                    {
+                        SchemaManager.QueryManager.Close();
+                    }
+                }
             }
         }
 

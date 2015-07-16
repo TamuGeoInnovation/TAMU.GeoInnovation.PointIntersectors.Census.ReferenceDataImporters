@@ -75,6 +75,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
         public bool ShouldDoZcta52010 { get; set; }
         public bool ShouldDoMetDiv2010 { get; set; }
         public bool ShouldDoCbsa2010 { get; set; }
+        
        
         #endregion
 
@@ -118,12 +119,12 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
             {
                 TraceSource.TraceEvent(TraceEventType.Information, (int)ProcessEvents.Completing, "importing files");
 
-                StatusManager.CreateImportStatusStateTable("import_status_states", Restart);
-                StatusManager.CreateImportStatusCountyTable("import_status_counties", Restart);
-                StatusManager.CreateImportStatusFileTable("import_status_files", Restart);
+                StatusManager.CreateImportStatusStateTable("import_status_states", Restart, ShouldRemoveStatusTablesFirst);
+                StatusManager.CreateImportStatusCountyTable("import_status_counties", Restart, ShouldRemoveStatusTablesFirst);
+                StatusManager.CreateImportStatusFileTable("import_status_files", Restart, ShouldRemoveStatusTablesFirst);
 
                 StatusManager.CreateStoredProcedures(false);
-                CreateNationTigerTables(Restart);
+                CreateNationTigerTables(Restart && ShouldRemoveOutputRecordsTableFirst);
 
                 if (ShouldDoStates2000)
                 {
@@ -302,7 +303,16 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                 if (ShouldDoStates2010)
                 {
                     ITigerFileLayout tigerFile =  States2010FileFactory.GetFile(QueryManager, "us");
-                    ImportTiger2010NationFile(topDirectory, tigerFile);
+                    
+                    if (ShouldUseUnzippedFolder)
+                    {
+                        ImportTiger2010NationFile(UnzippedFolder, tigerFile, ShouldUseUnzippedFolder, ShouldSkipExistingRecords);
+                    }
+                    else
+                    {
+                        ImportTiger2010NationFile(topDirectory, tigerFile, ShouldUseUnzippedFolder, ShouldSkipExistingRecords);
+                    }
+
                     if (!BackgroundWorker.CancellationPending)
                     {
                         SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, false);
@@ -316,7 +326,16 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                 if (ShouldDoCounties2010)
                 {
                     ITigerFileLayout tigerFile =  County2010FileFactory.GetFile(QueryManager, "us");
-                    ImportTiger2010NationFile(topDirectory, tigerFile);
+
+                    if (ShouldUseUnzippedFolder)
+                    {
+                        ImportTiger2010NationFile(UnzippedFolder, tigerFile, ShouldUseUnzippedFolder, ShouldSkipExistingRecords);
+                    }
+                    else
+                    {
+                        ImportTiger2010NationFile(topDirectory, tigerFile, ShouldUseUnzippedFolder, ShouldSkipExistingRecords);
+                    }
+
                     if (!BackgroundWorker.CancellationPending)
                     {
                         SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, false);
@@ -331,7 +350,16 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                 if (ShouldDoZcta52010)
                 {
                     ITigerFileLayout tigerFile =  Zcta52010FileFactory.GetFile(QueryManager, "us");
-                    ImportTiger2010NationFile(topDirectory, tigerFile);
+
+                    if (ShouldUseUnzippedFolder)
+                    {
+                        ImportTiger2010NationFile(UnzippedFolder, tigerFile, ShouldUseUnzippedFolder, ShouldSkipExistingRecords);
+                    }
+                    else
+                    {
+                        ImportTiger2010NationFile(topDirectory, tigerFile, ShouldUseUnzippedFolder, ShouldSkipExistingRecords);
+                    }
+
                     if (!BackgroundWorker.CancellationPending)
                     {
                         SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, false);
@@ -345,7 +373,16 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                 if (ShouldDoMetDiv2010)
                 {
                     ITigerFileLayout tigerFile =  MetDiv2010FileFactory.GetFile(QueryManager, "us");
-                    ImportTiger2010NationFile(topDirectory, tigerFile);
+
+                    if (ShouldUseUnzippedFolder)
+                    {
+                        ImportTiger2010NationFile(UnzippedFolder, tigerFile, ShouldUseUnzippedFolder, ShouldSkipExistingRecords);
+                    }
+                    else
+                    {
+                        ImportTiger2010NationFile(topDirectory, tigerFile, ShouldUseUnzippedFolder, ShouldSkipExistingRecords);
+                    }
+
                     if (!BackgroundWorker.CancellationPending)
                     {
                         SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, false);
@@ -359,7 +396,16 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                 if (ShouldDoCbsa2010)
                 {
                     ITigerFileLayout tigerFile =  Cbsa2010FileFactory.GetFile(QueryManager, "us");
-                    ImportTiger2010NationFile(topDirectory, tigerFile);
+
+                    if (ShouldUseUnzippedFolder)
+                    {
+                        ImportTiger2010NationFile(UnzippedFolder, tigerFile, ShouldUseUnzippedFolder, ShouldSkipExistingRecords);
+                    }
+                    else
+                    {
+                        ImportTiger2010NationFile(topDirectory, tigerFile, ShouldUseUnzippedFolder, ShouldSkipExistingRecords);
+                    }
+
                     if (!BackgroundWorker.CancellationPending)
                     {
                         SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, false);
@@ -505,7 +551,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
             return ret;
         }
 
-        public bool ImportTiger2010NationFile(string nationDirectory, ITigerFileLayout tigerFile)
+        public bool ImportTiger2010NationFile(string nationDirectory, ITigerFileLayout tigerFile,  bool shouldUseUnzippedFolder, bool shouldSkipExistingRecords)
         {
             bool ret = false;
             IDataReader dataReader = null;
@@ -533,7 +579,15 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
 
                         ((ITigerShapefileFileLayout)tigerFile).RecordsRead += new FileLayouts.Delegates.RecordsReadHandler(RecordsRead);
 
-                        dataReader = tigerFile.GetDataReaderFromZipFile(nationDirectory);
+
+                        if (!shouldUseUnzippedFolder)
+                        {
+                            dataReader = tigerFile.GetDataReaderFromZipFile(nationDirectory);
+                        }
+                        else
+                        {
+                            dataReader = tigerFile.GetDataReaderFromUnZippedFile(nationDirectory);
+                        }
 
                         if (QueryManager.DatabaseType == DatabaseType.MongoDB)
                         {
@@ -570,6 +624,9 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                                 {
                                     bulkCopy.SchemaDataTable = ((ExtendedCatfoodShapefileDataReader)dataReader).GetSchemaTable();
                                 }
+
+                                bulkCopy.ShouldSkipExistingRecords = ShouldSkipExistingRecords;
+                                bulkCopy.ExistingRecordIdField = (string)bulkCopy.SchemaDataTable.Rows[0].ItemArray[0]; // assume that the first field is the one that should be checked to existence in the database
 
                                 bulkCopy.WriteToServer(dataReader);
 

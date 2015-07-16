@@ -78,9 +78,9 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
             {
                 TraceSource.TraceEvent(TraceEventType.Information, (int)ProcessEvents.Completing, "importing files");
 
-                StatusManager.CreateImportStatusStateTable("import_status_states", Restart);
-                StatusManager.CreateImportStatusCountyTable("import_status_counties", Restart);
-                StatusManager.CreateImportStatusFileTable("import_status_files", Restart);
+                StatusManager.CreateImportStatusStateTable("import_status_states", Restart, ShouldRemoveStatusTablesFirst);
+                StatusManager.CreateImportStatusCountyTable("import_status_counties", Restart, ShouldRemoveStatusTablesFirst);
+                StatusManager.CreateImportStatusFileTable("import_status_files", Restart, ShouldRemoveStatusTablesFirst);
 
                 StatusManager.CreateStoredProcedures();
                 CreateNationTigerTables(Restart);
@@ -262,7 +262,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                 if (ShouldDoStates2010)
                 {
                     ITigerFileLayout tigerFile = States2010FileFactory.GetFile(QueryManager, "us");
-                    ImportTiger2010NationFile(topDirectory, tigerFile);
+                    ImportTiger2010NationFile(topDirectory, tigerFile, ShouldUseUnzippedFolder, ShouldSkipExistingRecords);
                     if (!BackgroundWorker.CancellationPending)
                     {
                         SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, false);
@@ -276,7 +276,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                 if (ShouldDoCounties2010)
                 {
                     ITigerFileLayout tigerFile = County2010FileFactory.GetFile(QueryManager, "us");
-                    ImportTiger2010NationFile(topDirectory, tigerFile);
+                    ImportTiger2010NationFile(topDirectory, tigerFile, ShouldUseUnzippedFolder, ShouldSkipExistingRecords);
                     if (!BackgroundWorker.CancellationPending)
                     {
                         SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, false);
@@ -291,7 +291,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                 if (ShouldDoZcta52010)
                 {
                     ITigerFileLayout tigerFile = Zcta52010FileFactory.GetFile(QueryManager, "us");
-                    ImportTiger2010NationFile(topDirectory, tigerFile);
+                    ImportTiger2010NationFile(topDirectory, tigerFile, ShouldUseUnzippedFolder, ShouldSkipExistingRecords);
                     if (!BackgroundWorker.CancellationPending)
                     {
                         SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, false);
@@ -305,7 +305,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                 if (ShouldDoMetDiv2010)
                 {
                     ITigerFileLayout tigerFile = MetDiv2010FileFactory.GetFile(QueryManager, "us");
-                    ImportTiger2010NationFile(topDirectory, tigerFile);
+                    ImportTiger2010NationFile(topDirectory, tigerFile, ShouldUseUnzippedFolder, ShouldSkipExistingRecords);
                     if (!BackgroundWorker.CancellationPending)
                     {
                         SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, false);
@@ -319,7 +319,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                 if (ShouldDoCbsa2010)
                 {
                     ITigerFileLayout tigerFile = Cbsa2010FileFactory.GetFile(QueryManager, "us");
-                    ImportTiger2010NationFile(topDirectory, tigerFile);
+                    ImportTiger2010NationFile(topDirectory, tigerFile, ShouldUseUnzippedFolder, ShouldSkipExistingRecords);
                     if (!BackgroundWorker.CancellationPending)
                     {
                         SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, false);

@@ -53,7 +53,14 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
 
         IImportStatusManager StatusManager { get; set; }
         TransactionManager TransactionManager { get; set; }
+
         bool Restart { get; set; }
+        bool ShouldRemoveOutputRecordsTableFirst { get; set; }
+        bool ShouldRemoveStatusTablesFirst { get; set; }
+        bool ShouldSkipExistingRecords { get; set; }
+        bool ShouldUseUnzippedFolder { get; set; }
+        string UnzippedFolder { get; set; }
+        
         bool TransactionRunning { get; set; }
         string ApplicationConnectionString { get; set; }
         DataProviderType ApplicationDataProviderType { get; set; }

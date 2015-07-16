@@ -68,6 +68,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
         bool ShouldDoZcta52010 { get; set; }
         bool ShouldDoMetDiv2010 { get; set; }
         bool ShouldDoCbsa2010 { get; set; }
+        
        
         #endregion
 
@@ -75,7 +76,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
 
         bool ImportTigerNationFile(string nationDirectory, ITigerFileLayout tigerFile);
 
-        bool ImportTiger2010NationFile(string nationDirectory, ITigerFileLayout tigerFile);
+        bool ImportTiger2010NationFile(string nationDirectory, ITigerFileLayout tigerFile, bool shouldUseUnzippedFolder, bool shouldSkipExistingRecords);
 
         void CreateNationTigerTables(bool dropFirst);
     }

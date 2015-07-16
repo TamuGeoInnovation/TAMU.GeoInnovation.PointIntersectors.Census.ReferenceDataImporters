@@ -8,6 +8,7 @@ using USC.GISResearchLab.Common.Core.Databases;
 using USC.GISResearchLab.Common.Databases.ConnectionStringManagers;
 using USC.GISResearchLab.Common.Databases.QueryManagers;
 using USC.GISResearchLab.Common.Utils.Files;
+using USC.GISResearchLab.Common.Utils.Directories;
 
 namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayouts.AbstractClasses
 {
@@ -22,6 +23,8 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayou
         #endregion
 
         #region Properties
+
+        public int NumberOfRecords { get; set; }
 
         public IQueryManager DataFileQueryManager { get; set; }
         public string SQLCreateTable { get; set; }
@@ -96,6 +99,65 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayou
             : this()
         {
             StateName = tableName;
+        }
+
+        public virtual IDataReader GetDataReaderFromUnZippedFile(string unzippedFileDirectory)
+        {
+            IDataReader ret = null;
+            string tempDirectory = null;
+
+            try
+            {
+
+                bool hasShapefile = false;
+                string shapefileName = null;
+                string dbffileName = null;
+
+                ArrayList fileList = DirectoryUtils.getFileList(unzippedFileDirectory);
+                if (fileList != null)
+                {
+                    for (int i = 0; i < fileList.Count; i++)
+                    {
+                        string file = (string)fileList[i];
+                        string fileExtension = FileUtils.GetExtension(file);
+                        if (String.Compare(fileExtension, ".shp", true) == 0)
+                        {
+                            hasShapefile = true;
+                            shapefileName = file;
+                            break;
+                        }
+                        if (String.Compare(fileExtension, ".dbf", true) == 0)
+                        {
+                            dbffileName = file;
+                        }
+                    }
+                }
+
+                if (hasShapefile)
+                {
+                    ret = GetDataReader(shapefileName);
+                }
+                else
+                {
+                    string dbfFileDirectory = FileUtils.GetDirectoryPath(dbffileName);
+                    string tempFile = Path.Combine(dbfFileDirectory, "temp.dbf");
+
+                    File.Copy(dbffileName, tempFile);
+                    ret = GetDataReader(tempFile);
+                }
+            }
+            catch (Exception e)
+            {
+                if (!String.IsNullOrEmpty(tempDirectory))
+                {
+                    if (Directory.Exists(tempDirectory))
+                    {
+                        DirectoryUtils.DeleteDirectory(tempDirectory);
+                    }
+                }
+                throw new Exception("Error getting datatable: " + e.Message, e);
+            }
+            return ret;
         }
 
         public abstract DataTable GetDataTableFromZipFile(string zipFileDirectory);

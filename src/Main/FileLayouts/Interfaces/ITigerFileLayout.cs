@@ -20,6 +20,8 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayou
 
         #region Properties
 
+        int NumberOfRecords { get; set; }
+
         string[][] BulkCopyColumnMappings { get; set; }
         string[] ExcludeColumns { get; set; }
         string SQLCreateTable { get; set; }
@@ -52,6 +54,8 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayou
         IDataReader GetDataReaderFromZipFile(string zipFileDirectory);
         DataTable GetDataTable(string fileLocation);
         IDataReader GetDataReader(string fileLocation);
+
+        IDataReader GetDataReaderFromUnZippedFile(string unzippedFileDirectory);
 
         void DeleteTempFiles();
         void DeleteTempDirectories();

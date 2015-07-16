@@ -59,6 +59,13 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
         public IImportStatusManager StatusManager { get; set; }
         public TransactionManager TransactionManager{ get; set; }
         public bool Restart { get; set; }
+
+        public bool ShouldRemoveOutputRecordsTableFirst { get; set; }
+        public bool ShouldRemoveStatusTablesFirst { get; set; }
+        public bool ShouldSkipExistingRecords { get; set; }
+        public bool ShouldUseUnzippedFolder { get; set; }
+        public string UnzippedFolder { get; set; }
+
         public bool TransactionRunning { get; set; }
         public string ApplicationConnectionString { get; set; }
         public string ApplicationDatabaseName { get; set; }
@@ -307,8 +314,8 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
 
         public virtual void RecordsRead(int completed, int total)
         {
-            //ProgressState.ProgressStateRecords.Completed = completed;
-            //ProgressState.ProgressStateRecords.Total = total;
+            ProgressState.Completed = completed;
+            ProgressState.Total = total;
             BackgroundWorker.ReportProgress(0, ProgressState);
         }
     }

@@ -347,9 +347,9 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
 
                     StatusManager.CreateStoredProcedures(false);
 
-                    StatusManager.CreateImportStatusStateTable("import_status_states", Restart);
-                    StatusManager.CreateImportStatusCountyTable("import_status_counties", Restart);
-                    StatusManager.CreateImportStatusFileTable("import_status_files", Restart);
+                    StatusManager.CreateImportStatusStateTable("import_status_states", Restart, ShouldRemoveStatusTablesFirst);
+                    StatusManager.CreateImportStatusCountyTable("import_status_counties", Restart, ShouldRemoveStatusTablesFirst);
+                    StatusManager.CreateImportStatusFileTable("import_status_files", Restart, ShouldRemoveStatusTablesFirst);
 
                     for (int i = 0; i < subDirectories.Count; i++)
                     {

@@ -137,13 +137,13 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Applicati
             }
         }
 
-        public void CreateImportStatusStateTable(string tableName, bool restart)
+        public void CreateImportStatusStateTable(string tableName, bool restart, bool shouldRemoveStatusTablesFirst)
         {
             try
             {
                 SchemaManager.QueryManager.Connection.Open();
-                
-                if (restart)
+
+                if (restart || shouldRemoveStatusTablesFirst)
                 {
                     SchemaManager.RemoveTableFromDatabase(tableName);
                 }
@@ -190,13 +190,13 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Applicati
             }
         }
 
-        public void CreateImportStatusCountyTable(string tableName, bool restart)
+        public void CreateImportStatusCountyTable(string tableName, bool restart, bool shouldRemoveStatusTablesFirst)
         {
             try
             {
                 SchemaManager.QueryManager.Connection.Open();
 
-                if (restart)
+                if (restart || shouldRemoveStatusTablesFirst)
                 {
                     SchemaManager.RemoveTableFromDatabase(tableName);
                 }
@@ -243,13 +243,13 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Applicati
             }
         }
 
-        public void CreateImportStatusFileTable(string tableName, bool restart)
+        public void CreateImportStatusFileTable(string tableName, bool restart, bool shouldRemoveStatusTablesFirst)
         {
             try
             {
                 SchemaManager.QueryManager.Connection.Open();
 
-                if (restart)
+                if (restart || shouldRemoveStatusTablesFirst)
                 {
                     SchemaManager.RemoveTableFromDatabase(tableName);
                 }

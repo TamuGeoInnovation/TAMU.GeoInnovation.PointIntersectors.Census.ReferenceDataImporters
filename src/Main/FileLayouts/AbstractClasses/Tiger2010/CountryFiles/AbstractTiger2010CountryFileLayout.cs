@@ -120,7 +120,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayou
                 string directoryName = DirectoryUtils.GetDirectoryName(zipFileDirectory);
                 string[] directoryParts = directoryName.Split('_');
                 string stateFips = directoryParts[0];
-                string zipFileName = "tl_2014_us_" + FileName;
+                string zipFileName = "tl_2010_us_" + FileName;
 
                 string zipFileLocation = Path.Combine(zipFileDirectory, zipFileName);
                 if (FileUtils.FileExists(zipFileLocation))

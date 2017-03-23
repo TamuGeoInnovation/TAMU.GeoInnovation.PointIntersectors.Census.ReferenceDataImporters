@@ -119,7 +119,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                         ImportTigerStateFile(stateName, stateDirectoryName, tigerFile);
                         if (!BackgroundWorker.CancellationPending)
                         {
-                            SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, false);
+                            SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, true);
                         }
                         if (!BackgroundWorker.CancellationPending)
                         {
@@ -133,7 +133,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                         ImportTigerStateFile(stateName, stateDirectoryName, tigerFile);
                         if (!BackgroundWorker.CancellationPending)
                         {
-                            SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, false);
+                            SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, true);
                         }
                         if (!BackgroundWorker.CancellationPending)
                         {
@@ -147,7 +147,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                         ImportTigerStateFile(stateName, stateDirectoryName, tigerFile);
                         if (!BackgroundWorker.CancellationPending)
                         {
-                            SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, false);
+                            SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, true);
                         }
                         if (!BackgroundWorker.CancellationPending)
                         {
@@ -162,7 +162,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                         ImportTigerStateFile(stateName, stateDirectoryName, tigerFile);
                         if (!BackgroundWorker.CancellationPending)
                         {
-                            SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, false);
+                            SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, true);
                         }
                         if (!BackgroundWorker.CancellationPending)
                         {
@@ -176,7 +176,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                         ImportTigerStateFile(stateName, stateDirectoryName, tigerFile);
                         if (!BackgroundWorker.CancellationPending)
                         {
-                            SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, false);
+                            SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, true);
                         }
                         if (!BackgroundWorker.CancellationPending)
                         {
@@ -190,7 +190,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                         ImportTigerStateFile(stateName, stateDirectoryName, tigerFile);
                         if (!BackgroundWorker.CancellationPending)
                         {
-                            SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, false);
+                            SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, true);
                         }
                         if (!BackgroundWorker.CancellationPending)
                         {
@@ -204,7 +204,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                         ImportTiger2010StateFile(stateName, stateDirectoryName, tigerFile);
                         if (!BackgroundWorker.CancellationPending)
                         {
-                            SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, false);
+                            SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, true);
                         }
                         if (!BackgroundWorker.CancellationPending)
                         {
@@ -218,7 +218,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                         ImportTiger2010StateFile(stateName, stateDirectoryName, tigerFile);
                         if (!BackgroundWorker.CancellationPending)
                         {
-                            SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, false);
+                            SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, true);
                         }
                         if (!BackgroundWorker.CancellationPending)
                         {
@@ -232,7 +232,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                         ImportTiger2010StateFile(stateName, stateDirectoryName, tigerFile);
                         if (!BackgroundWorker.CancellationPending)
                         {
-                            SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, false);
+                            SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, true);
                         }
                         if (!BackgroundWorker.CancellationPending)
                         {
@@ -312,6 +312,142 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                 CreateStateTigerTable(tigerFileLayout, dropFirst);
             }
         }
+
+        //public override bool RunImports(string topDirectory)
+        //{
+        //    bool ret = false;
+
+        //    try
+        //    {
+
+        //        TraceSource.TraceEvent(TraceEventType.Information, (int)ProcessEvents.Completing, "getting directories");
+        //        ArrayList subDirectories = DirectoryUtils.GetSubDirectories(topDirectory);
+
+
+        //        int countyDirectoryCount = 0;
+
+        //        if (subDirectories != null)
+        //        {
+
+        //            for (int i = 0; i < subDirectories.Count; i++)
+        //            {
+        //                string directory = (string)subDirectories[i];
+        //                string[] subSubDirectories = Directory.GetDirectories(directory);
+        //                if (subSubDirectories != null)
+        //                {
+        //                    countyDirectoryCount += subSubDirectories.Length;
+        //                }
+        //            }
+
+        //            ProgressState.ProgressStateStates.ResetTimer();
+        //            ProgressState.ProgressStateStates.Total = subDirectories.Count;
+        //            ProgressState.ProgressStateStates.Completed = 0;
+
+        //            TraceSource.TraceEvent(TraceEventType.Information, (int)ProcessEvents.Completing, "got directories: " + subDirectories.Count);
+
+        //            StatusManager.CreateStoredProcedures(false);
+
+        //            StatusManager.CreateImportStatusStateTable("import_status_states", Restart, ShouldRemoveStatusTablesFirst);
+        //            StatusManager.CreateImportStatusCountyTable("import_status_counties", Restart, ShouldRemoveStatusTablesFirst);
+        //            StatusManager.CreateImportStatusFileTable("import_status_files", Restart, ShouldRemoveStatusTablesFirst);
+
+        //            for (int i = 0; i < subDirectories.Count; i++)
+        //            {
+        //                string directory = (string)subDirectories[i];
+        //                string[] filenames = Directory.GetFiles(directory);
+
+        //                for (int files = 0; files < filenames.Length; files++)
+        //                {
+        //                    if (!BackgroundWorker.CancellationPending)
+        //                    {
+
+                                
+        //                        string directoryName = DirectoryUtils.GetDirectoryName(directory);
+                                
+
+        //                        //testing getting fips from first zip file
+        //                        string[] filenameParts = filenames[files].Split('_');
+        //                        string stateFips = filenameParts[2].Substring(filenameParts[2].Length - 2);
+        //                        //string stateFips = filenameParts[2].Substring(0, 2);
+
+
+        //                        string[] directoryNameParts = directoryName.Split('_');
+        //                        //string stateFips = directoryNameParts[0];
+
+
+        //                        string stateNameFull = "";
+        //                        State state = StateUtils.GetStateFromFIPS(stateFips);
+        //                        stateNameFull = state.PrimaryName;
+
+        //                        for (int j = 1; j < directoryNameParts.Length; j++)
+        //                        {
+        //                            if (j > 1)
+        //                            {
+        //                                stateNameFull += " ";
+        //                            }
+        //                            stateNameFull += directoryNameParts[j];
+        //                        }
+
+        //                        if (StateUtils.isState(stateNameFull))
+        //                        {
+        //                            //string stateName = StateUtils.getStateOfficialAbbreviation(stateNameFull);
+        //                            string stateName = state.OfficialAbbreviation;
+        //                            ProgressState.ProgressStateStates.Current = stateName;
+        //                            ProgressState.ProgressStateStates.Completed = files;
+        //                            BackgroundWorker.ReportProgress(0, ProgressState);
+
+
+        //                            if (!String.IsNullOrEmpty(stateName))
+        //                            {
+
+        //                                bool alreadyDone = StatusManager.CheckStatusStateAlreadyDone("import_status_states", stateName);
+        //                                if (!alreadyDone)
+        //                                {
+        //                                    StatusManager.UpdateStatusState("import_status_states", stateName, Statuses.start);
+
+        //                                    ImportStateDirectory(stateName, directory);
+
+        //                                    if (!BackgroundWorker.CancellationPending)
+        //                                    {
+        //                                        StatusManager.UpdateStatusState("import_status_states", stateName, Statuses.end);
+        //                                    }
+        //                                }
+        //                                else
+        //                                {
+        //                                    TraceSource.TraceEvent(TraceEventType.Information, (int)ProcessEvents.Completing, "import skipped state: " + stateName);
+        //                                }
+        //                            }
+        //                            else
+        //                            {
+        //                                throw new Exception("Could not find abbreviation for stateName: " + stateNameFull);
+        //                            }
+
+        //                            ProgressState.ProgressStateStates.Completed = files + 1;
+        //                            BackgroundWorker.ReportProgress(0, ProgressState);
+        //                        }
+
+        //                    }
+        //                    else
+        //                    {
+        //                        TraceSource.TraceEvent(TraceEventType.Information, (int)ProcessEvents.Cancelling);
+        //                        return false;
+        //                    }
+        //                }
+
+        //                if (!BackgroundWorker.CancellationPending)
+        //                {
+        //                    ret = true;
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch (Exception exc)
+        //    {
+        //        string msg = "Error importing direcories: " + exc.Message;
+        //        TraceSource.TraceEvent(TraceEventType.Error, (int)ExceptionEvents.ExceptionOccurred, msg);
+        //    }
+        //    return ret;
+        //}
 
         public override bool RunImports(string topDirectory)
         {

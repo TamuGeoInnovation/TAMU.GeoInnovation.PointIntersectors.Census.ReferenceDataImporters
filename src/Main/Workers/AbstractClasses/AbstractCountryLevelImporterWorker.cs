@@ -41,14 +41,18 @@ using USC.GISResearchLab.Common.Core.Databases.BulkCopys;
 //using USC.GISResearchLab.AddressProcessing.Core.Standardizing.StandardizedAddresses.Lines.LastLines;
 using USC.GISResearchLab.Common.Threading.ProgressStates;
 using USC.GISResearchLab.Common.Census.Tiger2010.FileLayouts.CountryFiles.AbstractClasses;
+using USC.GISResearchLab.Common.Census.Tiger2015.FileLayouts.CountryFiles.AbstractClasses;
 
 using TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayouts.Interfaces;
 using USC.GISResearchLab.Common.Databases.ImportStatusManagers;
 
 using USC.GISResearchLab.Common.Census.Tiger2010.FileLayouts.AbstractClasses;
+using USC.GISResearchLab.Common.Census.Tiger2015.FileLayouts.AbstractClasses;
 using USC.GISResearchLab.Common.Census.Tiger2010.FileLayouts.CountryFiles.Implementations;
+using USC.GISResearchLab.Common.Census.Tiger2015.FileLayouts.CountryFiles.Implementations;
 using TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayouts.Factories.Tiger2000.CountryFiles;
 using TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayouts.Factories.Tiger2010.CountryFiles;
+using TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayouts.Factories.Tiger2015.CountryFiles;
 using TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayouts.AbstractClasses;
 using USC.GISResearchLab.Common.Shapefiles.ShapefileReaders;
 
@@ -71,10 +75,15 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
         public bool ShouldDoZcta32008 { get; set; }
         public bool ShouldDoZcta52008 { get; set; }
         public bool ShouldDoStates2010 { get; set; }
+        public bool ShouldDoStates2015 { get; set; }
         public bool ShouldDoCounties2010 { get; set; }
+        public bool ShouldDoCounties2015 { get; set; }
         public bool ShouldDoZcta52010 { get; set; }
+        public bool ShouldDoZcta52015 { get; set; }
         public bool ShouldDoMetDiv2010 { get; set; }
+        public bool ShouldDoMetDiv2015 { get; set; }
         public bool ShouldDoCbsa2010 { get; set; }
+        public bool ShouldDoCbsa2015 { get; set; }
         
        
         #endregion
@@ -171,7 +180,17 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                     FileCountTotal++;
                 }
 
+                if (ShouldDoStates2015)
+                {
+                    FileCountTotal++;
+                }
+
                 if (ShouldDoCounties2010)
+                {
+                    FileCountTotal++;
+                }
+
+                if (ShouldDoCounties2015)
                 {
                     FileCountTotal++;
                 }
@@ -181,12 +200,26 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                     FileCountTotal++;
                 }
 
+                if (ShouldDoZcta52015)
+                {
+                    FileCountTotal++;
+                }
+
                 if (ShouldDoMetDiv2010)
                 {
                     FileCountTotal++;
                 }
 
+                if (ShouldDoMetDiv2015)
+                {
+                    FileCountTotal++;
+                }
+
                 if (ShouldDoCbsa2010)
+                {
+                    FileCountTotal++;
+                }
+                if (ShouldDoCbsa2015)
                 {
                     FileCountTotal++;
                 }
@@ -198,7 +231,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                 {
                     ITigerFileLayout tigerFile = States2000FileFactory.GetStates2000File(QueryManager, "us");
                     ImportTigerNationFile(topDirectory, tigerFile);
-                    SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, false);
+                    SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, true);
                     CreateIndex(tigerFile.OutputTableName, tigerFile.SQLCreateTableIndexes);
                 }
 
@@ -208,7 +241,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                     ImportTigerNationFile(topDirectory, tigerFile);
                     if (!BackgroundWorker.CancellationPending)
                     {
-                        SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, false);
+                        SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, true);
                     }
                     if (!BackgroundWorker.CancellationPending)
                     {
@@ -222,7 +255,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                     ImportTigerNationFile(topDirectory, tigerFile);
                     if (!BackgroundWorker.CancellationPending)
                     {
-                        SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, false);
+                        SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, true);
                     }
                     if (!BackgroundWorker.CancellationPending)
                     {
@@ -236,7 +269,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                     ImportTigerNationFile(topDirectory, tigerFile);
                     if (!BackgroundWorker.CancellationPending)
                     {
-                        SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, false);
+                        SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, true);
                     }
                     if (!BackgroundWorker.CancellationPending)
                     {
@@ -250,7 +283,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                     ImportTigerNationFile(topDirectory, tigerFile);
                     if (!BackgroundWorker.CancellationPending)
                     {
-                        SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, false);
+                        SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, true);
                     }
                     if (!BackgroundWorker.CancellationPending)
                     {
@@ -264,7 +297,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                     ImportTigerNationFile(topDirectory, tigerFile);
                     if (!BackgroundWorker.CancellationPending)
                     {
-                        SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, false);
+                        SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, true);
                     }
                     if (!BackgroundWorker.CancellationPending)
                     {
@@ -278,7 +311,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                     ImportTigerNationFile(topDirectory, tigerFile);
                     if (!BackgroundWorker.CancellationPending)
                     {
-                        SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, false);
+                        SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, true);
                     }
                     if (!BackgroundWorker.CancellationPending)
                     {
@@ -292,7 +325,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                     ImportTigerNationFile(topDirectory, tigerFile);
                     if (!BackgroundWorker.CancellationPending)
                     {
-                        SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, false);
+                        SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, true);
                     }
                     if (!BackgroundWorker.CancellationPending)
                     {
@@ -315,13 +348,38 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
 
                     if (!BackgroundWorker.CancellationPending)
                     {
-                        SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, false);
+                        SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, true);
                     }
                     if (!BackgroundWorker.CancellationPending)
                     {
                         CreateIndex(tigerFile.OutputTableName, tigerFile.SQLCreateTableIndexes);
                     }
                 }
+
+                if (ShouldDoStates2015)
+                {
+                    ITigerFileLayout tigerFile = States2015FileFactory.GetFile(QueryManager, "us");
+
+                    if (ShouldUseUnzippedFolder)
+                    {
+                        //note we did not update this to 2015 since the function would be the same
+                        ImportTiger2010NationFile(UnzippedFolder, tigerFile, ShouldUseUnzippedFolder, ShouldSkipExistingRecords);
+                    }
+                    else
+                    {
+                        //note we did not update this to 2015 since the function would be the same
+                        ImportTiger2010NationFile(topDirectory, tigerFile, ShouldUseUnzippedFolder, ShouldSkipExistingRecords);
+                    }
+
+                    if (!BackgroundWorker.CancellationPending)
+                    {
+                        SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, true);
+                    }
+                    if (!BackgroundWorker.CancellationPending)
+                    {
+                        CreateIndex(tigerFile.OutputTableName, tigerFile.SQLCreateTableIndexes);
+                    }
+                } 
 
                 if (ShouldDoCounties2010)
                 {
@@ -338,14 +396,13 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
 
                     if (!BackgroundWorker.CancellationPending)
                     {
-                        SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, false);
+                        SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, true);
                     }
                     if (!BackgroundWorker.CancellationPending)
                     {
                         CreateIndex(tigerFile.OutputTableName, tigerFile.SQLCreateTableIndexes);
                     }
-                }
-
+                }                
 
                 if (ShouldDoZcta52010)
                 {
@@ -362,7 +419,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
 
                     if (!BackgroundWorker.CancellationPending)
                     {
-                        SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, false);
+                        SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, true);
                     }
                     if (!BackgroundWorker.CancellationPending)
                     {
@@ -385,7 +442,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
 
                     if (!BackgroundWorker.CancellationPending)
                     {
-                        SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, false);
+                        SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, true);
                     }
                     if (!BackgroundWorker.CancellationPending)
                     {
@@ -408,7 +465,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
 
                     if (!BackgroundWorker.CancellationPending)
                     {
-                        SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, false);
+                        SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, true);
                     }
                     if (!BackgroundWorker.CancellationPending)
                     {
@@ -682,6 +739,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
             }
             return ret;
         }
+        
 
         public void CreateNationTigerTables(bool dropFirst)
         {

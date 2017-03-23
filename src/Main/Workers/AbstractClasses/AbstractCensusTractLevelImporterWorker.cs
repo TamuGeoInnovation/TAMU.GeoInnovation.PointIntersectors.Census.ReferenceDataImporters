@@ -147,7 +147,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                         ImportTiger2010StateFile(stateName, stateDirectoryName, tigerFile);
                         if (!BackgroundWorker.CancellationPending)
                         {
-                            SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, false);
+                            SchemaManager.AddGeogIndexToDatabase(tigerFile.OutputTableName, true);
                         }
                     }
 

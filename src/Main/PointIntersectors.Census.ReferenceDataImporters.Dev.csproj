@@ -24,7 +24,7 @@
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
@@ -52,6 +52,7 @@
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -61,6 +62,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -71,6 +73,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>..\build\v1.0\bin\x86\release\</OutputPath>
@@ -79,6 +82,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Catfood.Shapefile">
@@ -114,6 +118,10 @@
     <Compile Include="FileLayouts\AbstractClasses\AbstractTigerShapefileFileLayout.cs" />
     <Compile Include="FileLayouts\AbstractClasses\AbstractTigerFileLayout.cs" />
     <Compile Include="FileLayouts\AbstractClasses\AbstractTigerShapefileFileLayout_Old.cs" />
+    <Compile Include="FileLayouts\AbstractClasses\Tiger2015\CountryFiles\AbstractTiger2015CountryFileLayout.cs" />
+    <Compile Include="FileLayouts\AbstractClasses\Tiger2015\CountryFiles\AbstractTiger2015ShapefileCountryFileLayout.cs" />
+    <Compile Include="FileLayouts\AbstractClasses\Tiger2015\StateFiles\AbstractTiger2015ShapefileStateFileLayout.cs" />
+    <Compile Include="FileLayouts\AbstractClasses\Tiger2015\StateFiles\AbstractTiger2015StateFileLayout.cs" />
     <Compile Include="FileLayouts\AbstractClasses\Tiger2010\CountryFiles\AbstractTiger2010CountryFileLayout.cs" />
     <Compile Include="FileLayouts\AbstractClasses\Tiger2010\CountryFiles\AbstractTiger2010ShapefileCountryFileLayout.cs" />
     <Compile Include="FileLayouts\AbstractClasses\Tiger2010\StateFiles\AbstractTiger2010ShapefileStateFileLayout.cs" />
@@ -127,6 +135,16 @@
     <Compile Include="FileLayouts\AbstractClasses\Tiger1990\StateFiles\AbstractTiger1990ShapefileStateFileLayout.cs" />
     <Compile Include="FileLayouts\AbstractClasses\Tiger1990\StateFiles\AbstractTiger1990StateFileLayout.cs" />
     <Compile Include="FileLayouts\Delegates\Delegates.cs" />
+    <Compile Include="FileLayouts\Factories\Tiger2015\CountryFiles\Cbsa2015FileFactory.cs" />
+    <Compile Include="FileLayouts\Factories\Tiger2015\CountryFiles\County2015FileFactory.cs" />
+    <Compile Include="FileLayouts\Factories\Tiger2015\CountryFiles\MetDiv2015FileFactory.cs" />
+    <Compile Include="FileLayouts\Factories\Tiger2015\CountryFiles\States2015FileFactory.cs" />
+    <Compile Include="FileLayouts\Factories\Tiger2015\CountryFiles\Zcta52015FileFactory.cs" />
+    <Compile Include="FileLayouts\Factories\Tiger2015\StateFiles\CensusBlock2015FileFactory.cs" />
+    <Compile Include="FileLayouts\Factories\Tiger2015\StateFiles\CensusTract2015FileFactory.cs" />
+    <Compile Include="FileLayouts\Factories\Tiger2015\StateFiles\ConsolidatedCity2015FileFactory.cs" />
+    <Compile Include="FileLayouts\Factories\Tiger2015\StateFiles\CountySub2015FileFactory.cs" />
+    <Compile Include="FileLayouts\Factories\Tiger2015\StateFiles\Place2015FileFactory.cs" />
     <Compile Include="FileLayouts\Factories\Tiger2000\StateFiles\CensusTract2000FileFactory.cs" />
     <Compile Include="FileLayouts\Factories\Tiger2000\StateFiles\CountySub2000FileFactory.cs" />
     <Compile Include="FileLayouts\Factories\Tiger2010\CountryFiles\Cbsa2010FileFactory.cs" />

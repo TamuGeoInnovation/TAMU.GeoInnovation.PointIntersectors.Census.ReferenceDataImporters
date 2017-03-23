@@ -68,6 +68,11 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
         bool ShouldDoZcta52010 { get; set; }
         bool ShouldDoMetDiv2010 { get; set; }
         bool ShouldDoCbsa2010 { get; set; }
+        bool ShouldDoStates2015 { get; set; }
+        bool ShouldDoCounties2015 { get; set; }
+        bool ShouldDoZcta52015 { get; set; }
+        bool ShouldDoMetDiv2015 { get; set; }
+        bool ShouldDoCbsa2015 { get; set; }
         
        
         #endregion

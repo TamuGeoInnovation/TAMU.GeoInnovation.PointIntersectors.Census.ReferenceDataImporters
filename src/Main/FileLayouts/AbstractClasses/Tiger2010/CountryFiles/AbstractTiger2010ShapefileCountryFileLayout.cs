@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Data;
-using USC.GISResearchLab.Common.Shapefiles.ShapefileReaders;
-using TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayouts.Interfaces;
 using TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayouts.Delegates;
+using TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayouts.Interfaces;
+using USC.GISResearchLab.Common.Shapefiles.ShapefileReaders;
 
 namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayouts.AbstractClasses.Tiger2010.CountryFiles
 {

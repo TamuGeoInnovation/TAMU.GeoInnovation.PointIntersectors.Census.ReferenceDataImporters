@@ -1,8 +1,5 @@
-﻿using System;
-using System.Data;
-//using Reimers.Esri;
+﻿//using Reimers.Esri;
 using TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayouts.Delegates;
-using USC.GISResearchLab.Common.Shapefiles.ShapefileReaders;
 
 namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayouts.Interfaces
 {

@@ -7,8 +7,8 @@ using TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayouts.I
 using USC.GISResearchLab.Common.Core.Databases;
 using USC.GISResearchLab.Common.Databases.ConnectionStringManagers;
 using USC.GISResearchLab.Common.Databases.QueryManagers;
-using USC.GISResearchLab.Common.Utils.Files;
 using USC.GISResearchLab.Common.Utils.Directories;
+using USC.GISResearchLab.Common.Utils.Files;
 
 namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayouts.AbstractClasses
 {

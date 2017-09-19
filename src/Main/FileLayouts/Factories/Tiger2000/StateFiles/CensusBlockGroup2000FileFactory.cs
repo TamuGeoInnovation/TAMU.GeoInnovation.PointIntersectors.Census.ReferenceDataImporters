@@ -1,13 +1,9 @@
 using System;
 using System.IO;
 using System.Reflection;
+using TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayouts.Interfaces;
 using USC.GISResearchLab.Common.Core.Databases;
 using USC.GISResearchLab.Common.Databases.QueryManagers;
-using TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers;
-using System.Diagnostics;
-using System.ComponentModel;
-using USC.GISResearchLab.Common.Databases.SchemaManagers;
-using TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayouts.Interfaces;
 
 namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayouts.Factories.Tiger2000.StateFiles
 {

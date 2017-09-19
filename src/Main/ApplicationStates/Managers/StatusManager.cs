@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Data;
+using System.Data.SqlClient;
+using System.Diagnostics;
 using USC.GISResearchLab.Common.Core.Databases;
+using USC.GISResearchLab.Common.Databases.ImportStatusManagers;
 using USC.GISResearchLab.Common.Databases.QueryManagers;
 using USC.GISResearchLab.Common.Databases.SchemaManagers;
-using System.Diagnostics;
-using System.Data.SqlClient;
-using USC.GISResearchLab.Common.Utils.Databases;
-using System.Data;
-using USC.GISResearchLab.Common.Diagnostics.TraceEvents;
 using USC.GISResearchLab.Common.Databases.StoredProcedures;
-using USC.GISResearchLab.Common.Databases.ImportStatusManagers;
+using USC.GISResearchLab.Common.Diagnostics.TraceEvents;
+using USC.GISResearchLab.Common.Utils.Databases;
 
 namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.ApplicationStates.Managers
 {

@@ -1,9 +1,8 @@
-﻿using System;
+﻿using ICSharpCode.SharpZipLib.Zip;
+using System;
 using System.Collections;
 using System.Data;
 using System.IO;
-using ICSharpCode.SharpZipLib.Zip;
-
 using USC.GISResearchLab.Common.Utils.Directories;
 using USC.GISResearchLab.Common.Utils.Files;
 

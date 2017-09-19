@@ -15,10 +15,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using System;
-using USC.GISResearchLab.Common.Utils.Numbers;
-using System.Globalization;
-using System.Collections;
 using USC.GISResearchLab.Common.Threading.ProgressStates;
 
 namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers

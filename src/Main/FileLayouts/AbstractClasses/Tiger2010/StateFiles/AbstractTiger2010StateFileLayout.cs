@@ -8,7 +8,7 @@ using USC.GISResearchLab.Common.Utils.Files;
 
 namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayouts.AbstractClasses.Tiger2010.StateFiles
 {
-    public abstract class AbstractTiger2010StateFileLayout: AbstractTigerFileLayout
+    public abstract class AbstractTiger2010StateFileLayout : AbstractTigerFileLayout
     {
 
         public AbstractTiger2010StateFileLayout()

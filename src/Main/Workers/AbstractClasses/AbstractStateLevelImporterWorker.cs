@@ -15,49 +15,28 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+using Microsoft.SqlServer.Types;
+using SQLSpatialTools;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.ComponentModel;
-using System.Data.SqlClient;
 using System.Collections;
+using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
-
-using ICSharpCode.SharpZipLib.Zip;
-
-using USC.GISResearchLab.Common.Utils.Directories;
-using USC.GISResearchLab.Common.Utils.Strings;
-using USC.GISResearchLab.Common.Utils.Files;
-using USC.GISResearchLab.Common.Diagnostics.TraceEvents;
-using USC.GISResearchLab.Common.Databases;
-using USC.GISResearchLab.Common.Census;
-using USC.GISResearchLab.Common.Utils.Databases;
-using USC.GISResearchLab.Common.Databases.QueryManagers;
-using USC.GISResearchLab.Common.Core.Databases;
-using USC.GISResearchLab.Common.Databases.SchemaManagers;
-using Microsoft.SqlServer.Types;
-
-
-
-using TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.ApplicationStates.Managers;
-using USC.GISResearchLab.Common.Core.Databases.BulkCopys;
-using USC.GISResearchLab.AddressProcessing.Core.Standardizing.StandardizedAddresses.Lines.LastLines;
-
-using TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayouts.Interfaces;
-
-
-
-
-using USC.GISResearchLab.Common.Census.Tiger2010.FileLayouts.StateFiles.AbstractClasses;
-using USC.GISResearchLab.Common.Census.Tiger2010.FileLayouts.AbstractClasses;
-using USC.GISResearchLab.Common.Census.Tiger2010.FileLayouts.StateFiles.Implementations;
 using TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayouts.Factories.Tiger2000.StateFiles;
 using TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayouts.Factories.Tiger2010.StateFiles;
+using TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayouts.Interfaces;
+using USC.GISResearchLab.AddressProcessing.Core.Standardizing.StandardizedAddresses.Lines.LastLines;
+using USC.GISResearchLab.Common.Core.Databases;
+using USC.GISResearchLab.Common.Core.Databases.BulkCopys;
 using USC.GISResearchLab.Common.Databases.ImportStatusManagers;
+using USC.GISResearchLab.Common.Databases.QueryManagers;
+using USC.GISResearchLab.Common.Databases.SchemaManagers;
+using USC.GISResearchLab.Common.Diagnostics.TraceEvents;
 using USC.GISResearchLab.Common.Shapefiles.ShapefileReaders;
-using SQLSpatialTools;
+using USC.GISResearchLab.Common.Utils.Databases;
+using USC.GISResearchLab.Common.Utils.Directories;
 
 
 
@@ -361,9 +340,9 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
         //                    if (!BackgroundWorker.CancellationPending)
         //                    {
 
-                                
+
         //                        string directoryName = DirectoryUtils.GetDirectoryName(directory);
-                                
+
 
         //                        //testing getting fips from first zip file
         //                        string[] filenameParts = filenames[files].Split('_');
@@ -720,50 +699,51 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                         ((ITigerShapefileFileLayout)tigerFile).RecordsRead += new FileLayouts.Delegates.RecordsReadHandler(RecordsRead);
                         dataReader = tigerFile.GetDataReaderFromZipFile(stateDirectory);
 
-                        
+
                         if (dataReader != null)
                         {
-                        {
-
-                            try
                             {
-                                TraceSource.TraceEvent(TraceEventType.Information, (int)ProcessEvents.Completing, " -- Copy to Server: " + tigerFile.FileName + " (" + DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") + ")");
 
-                                ProgressState.ProgressStateRecords.Current = state + " - " + tigerFile.FileName;
-                                ProgressState.ProgressStateRecords.Message = "Copying to server";
-                                BackgroundWorker.ReportProgress(0, ProgressState);
-
-                                if (QueryManager.DatabaseType == DatabaseType.MongoDB)
+                                try
                                 {
-                                    ((ExtendedCatfoodShapefileDataReader)dataReader).IncludeSqlGeographyAsGeoJSON = true;
-                                    ((ExtendedCatfoodShapefileDataReader)dataReader).IncludeSqlGeometryAsGeoJSON = true;
-                                }
-                                else
-                                {
-                                    ((ExtendedCatfoodShapefileDataReader)dataReader).IncludeSqlGeographyAsGeoJSON = false;
-                                    ((ExtendedCatfoodShapefileDataReader)dataReader).IncludeSqlGeometryAsGeoJSON = false;
-                                }
+                                    TraceSource.TraceEvent(TraceEventType.Information, (int)ProcessEvents.Completing, " -- Copy to Server: " + tigerFile.FileName + " (" + DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") + ")");
 
-                                if(QueryManager.DatabaseType == DatabaseType.MongoDB || QueryManager.DatabaseType == DatabaseType.MySql)
-                                 {
+                                    ProgressState.ProgressStateRecords.Current = state + " - " + tigerFile.FileName;
+                                    ProgressState.ProgressStateRecords.Message = "Copying to server";
+                                    BackgroundWorker.ReportProgress(0, ProgressState);
 
-                                    IBulkCopy bulkCopy = BulkCopyFactory.GetBulkCopy(QueryManager, SqlBulkCopyOptions.KeepIdentity | SqlBulkCopyOptions.TableLock | SqlBulkCopyOptions.KeepNulls, null);
-                                    bulkCopy.DestinationTableName = tigerFile.OutputTableName;
-                                    bulkCopy.DatabaseName = ApplicationDatabaseName;
-                                    bulkCopy.NotifyAfter = BulkCopyReportAfter;
-                                    bulkCopy.BatchSize = BulkCopyBatchSize;
-                                    bulkCopy.SqlRowsCopied += new SqlRowsCopiedEventHandler(sqlBulkCopy_SqlRowsCopied);
-                                    bulkCopy.GenerateColumnMappings(tigerFile.ExcludeColumns);
-
-                                    if (((ExtendedCatfoodShapefileDataReader)dataReader).FileDataConnection == null)
+                                    if (QueryManager.DatabaseType == DatabaseType.MongoDB)
                                     {
-                                        bulkCopy.SchemaDataTable = ((ExtendedCatfoodShapefileDataReader)dataReader).GetSchemaTable();
+                                        ((ExtendedCatfoodShapefileDataReader)dataReader).IncludeSqlGeographyAsGeoJSON = true;
+                                        ((ExtendedCatfoodShapefileDataReader)dataReader).IncludeSqlGeometryAsGeoJSON = true;
+                                    }
+                                    else
+                                    {
+                                        ((ExtendedCatfoodShapefileDataReader)dataReader).IncludeSqlGeographyAsGeoJSON = false;
+                                        ((ExtendedCatfoodShapefileDataReader)dataReader).IncludeSqlGeometryAsGeoJSON = false;
                                     }
 
-                                    bulkCopy.WriteToServer(dataReader);
-                                } else if(QueryManager.DatabaseType == DatabaseType.Npgsql)
-                                {
-                                     DataTable schemaDataTable = null;
+                                    if (QueryManager.DatabaseType == DatabaseType.MongoDB || QueryManager.DatabaseType == DatabaseType.MySql)
+                                    {
+
+                                        IBulkCopy bulkCopy = BulkCopyFactory.GetBulkCopy(QueryManager, SqlBulkCopyOptions.KeepIdentity | SqlBulkCopyOptions.TableLock | SqlBulkCopyOptions.KeepNulls, null);
+                                        bulkCopy.DestinationTableName = tigerFile.OutputTableName;
+                                        bulkCopy.DatabaseName = ApplicationDatabaseName;
+                                        bulkCopy.NotifyAfter = BulkCopyReportAfter;
+                                        bulkCopy.BatchSize = BulkCopyBatchSize;
+                                        bulkCopy.SqlRowsCopied += new SqlRowsCopiedEventHandler(sqlBulkCopy_SqlRowsCopied);
+                                        bulkCopy.GenerateColumnMappings(tigerFile.ExcludeColumns);
+
+                                        if (((ExtendedCatfoodShapefileDataReader)dataReader).FileDataConnection == null)
+                                        {
+                                            bulkCopy.SchemaDataTable = ((ExtendedCatfoodShapefileDataReader)dataReader).GetSchemaTable();
+                                        }
+
+                                        bulkCopy.WriteToServer(dataReader);
+                                    }
+                                    else if (QueryManager.DatabaseType == DatabaseType.Npgsql)
+                                    {
+                                        DataTable schemaDataTable = null;
 
                                         if (((ExtendedCatfoodShapefileDataReader)dataReader).FileDataConnection == null)
                                         {
@@ -880,58 +860,58 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                                                 }
 
                                             }
-                                            
+
                                             IQueryManager qm = SchemaManager.QueryManager;
 
                                             qm.AddParameters(cmd.Parameters);
-                                           // IDbDataParameter []_Parameters = SchemaManager.QueryManager.Parameters;
+                                            // IDbDataParameter []_Parameters = SchemaManager.QueryManager.Parameters;
                                             qm.ExecuteNonQuery(CommandType.Text, cmd.CommandText, true);
                                         }
 
-                                }
-                                
-                                UpdateRecordsCompletedCount(ProgressState.ProgressStateRecords.Total);
-                                TraceSource.TraceEvent(TraceEventType.Information, (int)ProcessEvents.Completing, " -- Copy to Server Finsihed: " + tigerFile.FileName + " (" + DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") + ")");
-                            }
-                            catch (Exception e)
-                            {
-                                if (!BackgroundWorker.CancellationPending)
-                                {
-                                    throw new Exception("Exception during IBulkCopy: " + e.Message, e);
-                                }
-                            }
-                        }
+                                    }
 
-                        if (dataReader != null)
-                        {
-                            dataReader.Close();
-
-                            if (tigerFile.DataFileQueryManager != null)
-                            {
-                                if (tigerFile.DataFileQueryManager.Connection != null)
+                                    UpdateRecordsCompletedCount(ProgressState.ProgressStateRecords.Total);
+                                    TraceSource.TraceEvent(TraceEventType.Information, (int)ProcessEvents.Completing, " -- Copy to Server Finsihed: " + tigerFile.FileName + " (" + DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") + ")");
+                                }
+                                catch (Exception e)
                                 {
-                                    if (tigerFile.DataFileQueryManager.Connection.State != ConnectionState.Closed)
+                                    if (!BackgroundWorker.CancellationPending)
                                     {
-                                        tigerFile.DataFileQueryManager.Close();
+                                        throw new Exception("Exception during IBulkCopy: " + e.Message, e);
                                     }
                                 }
                             }
-                        }
 
-                        tigerFile.DeleteTempDirectories();
+                            if (dataReader != null)
+                            {
+                                dataReader.Close();
 
-                        if (!BackgroundWorker.CancellationPending)
-                        {
-                            StatusManager.UpdateStatusFile("import_status_files", state, state, tigerFile.FileName, Statuses.end);
+                                if (tigerFile.DataFileQueryManager != null)
+                                {
+                                    if (tigerFile.DataFileQueryManager.Connection != null)
+                                    {
+                                        if (tigerFile.DataFileQueryManager.Connection.State != ConnectionState.Closed)
+                                        {
+                                            tigerFile.DataFileQueryManager.Close();
+                                        }
+                                    }
+                                }
+                            }
+
+                            tigerFile.DeleteTempDirectories();
+
+                            if (!BackgroundWorker.CancellationPending)
+                            {
+                                StatusManager.UpdateStatusFile("import_status_files", state, state, tigerFile.FileName, Statuses.end);
+                            }
                         }
                     }
+                    else
+                    {
+                        TraceSource.TraceEvent(TraceEventType.Information, (int)ProcessEvents.Cancelling);
+                        return false;
+                    }
                 }
-                else
-                {
-                    TraceSource.TraceEvent(TraceEventType.Information, (int)ProcessEvents.Cancelling);
-                    return false;
-                }
-            }
             }
             catch (Exception e)
             {
@@ -941,5 +921,5 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
             }
             return ret;
         }
- }
+    }
 }

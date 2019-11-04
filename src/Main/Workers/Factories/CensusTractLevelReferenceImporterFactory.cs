@@ -1,11 +1,11 @@
 using System;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers;
 using USC.GISResearchLab.Common.Core.Databases;
 using USC.GISResearchLab.Common.Databases.QueryManagers;
-using TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers;
-using System.Diagnostics;
-using System.ComponentModel;
 using USC.GISResearchLab.Common.Databases.SchemaManagers;
 
 namespace TAMU.GeoInnovation.PointIntersectors.Census.PointIntersecters.Factories

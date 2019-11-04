@@ -16,7 +16,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Applicati
 
     public class StatusManager
     {
-        
+
 
         #region Properties
 
@@ -441,7 +441,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Applicati
 
                 if (id <= 0 || status == Statuses.start)
                 {
-                    InsertStatusFile(tableName, state, county,  file);
+                    InsertStatusFile(tableName, state, county, file);
                 }
                 else
                 {
@@ -563,7 +563,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Applicati
                 QueryManager.AddParameters(cmd.Parameters);
                 int id = QueryManager.ExecuteScalarInt(CommandType.Text, cmd.CommandText, true);
 
-                
+
 
                 if (id <= 0 || status == Statuses.start)
                 {

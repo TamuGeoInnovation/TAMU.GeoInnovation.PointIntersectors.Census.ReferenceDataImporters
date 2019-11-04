@@ -12,7 +12,7 @@ using USC.GISResearchLab.Common.Utils.Files;
 
 namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayouts.AbstractClasses.Tiger1990.StateFiles
 {
-    public abstract class AbstractTiger1990FileLayout: ITigerFileLayout
+    public abstract class AbstractTiger1990FileLayout : ITigerFileLayout
     {
 
         #region Events
@@ -40,10 +40,10 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayou
         public string[] SQLCreateViews { get; set; }
 
         public string[] ExcludeColumns { get; set; }
-        
+
         public bool HasSoundexColumns { get; set; }
         public string[] SoundexColumns { get; set; }
-        
+
         public bool HasEndPointsColumns { get; set; }
         public string[] EndPointsColumns { get; set; }
 
@@ -72,7 +72,8 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayou
 
         public string OutputTableName
         {
-            get {
+            get
+            {
                 string ret = "";
                 if (!String.IsNullOrEmpty(StateName))
                 {

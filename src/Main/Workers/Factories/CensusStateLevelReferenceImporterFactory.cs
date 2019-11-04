@@ -1,12 +1,12 @@
 using System;
-using System.IO;
-using System.Reflection;
-using USC.GISResearchLab.Common.Core.Databases;
-using USC.GISResearchLab.Common.Databases.QueryManagers;
-using TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers;
-using USC.GISResearchLab.Common.Databases.SchemaManagers;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
+using System.Reflection;
+using TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers;
+using USC.GISResearchLab.Common.Core.Databases;
+using USC.GISResearchLab.Common.Databases.QueryManagers;
+using USC.GISResearchLab.Common.Databases.SchemaManagers;
 
 namespace TAMU.GeoInnovation.PointIntersectors.Census.PointIntersecters.Factories
 {
@@ -53,7 +53,7 @@ namespace TAMU.GeoInnovation.PointIntersectors.Census.PointIntersecters.Factorie
 
                 case DataProviderType.Npgsql:
                     assemblyPath = Path.Combine(outputDataQueryManager.PathToDatabaseDLLs, "TAMU.GeoInnovation.PointIntersectors.Census.ReferenceDataImporters.PostgreSQL.dll");
-                                                                                                                    
+
                     assembly = Assembly.LoadFile(assemblyPath);
                     if (assembly != null)
                     {

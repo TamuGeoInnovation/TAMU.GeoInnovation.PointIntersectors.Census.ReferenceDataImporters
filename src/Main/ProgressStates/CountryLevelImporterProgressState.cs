@@ -29,7 +29,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
         public TimeRemainableProgressState ProgressStateFiles { get; set; }
         public TimeRemainableProgressState ProgressStateRecords { get; set; }
 
-        
+
 
         #endregion
 

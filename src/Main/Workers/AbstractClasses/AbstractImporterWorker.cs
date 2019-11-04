@@ -16,35 +16,20 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.ComponentModel;
-using System.Data.SqlClient;
 using System.Collections;
+using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Diagnostics;
-using System.IO;
-
-using ICSharpCode.SharpZipLib.Zip;
-
-using USC.GISResearchLab.Common.Utils.Directories;
-using USC.GISResearchLab.Common.Utils.Strings;
-using USC.GISResearchLab.Common.Utils.Files;
-using USC.GISResearchLab.Common.Diagnostics.TraceEvents;
-using USC.GISResearchLab.Common.Databases;
-using USC.GISResearchLab.Common.Census;
-using USC.GISResearchLab.Common.Utils.Databases;
-using USC.GISResearchLab.Common.Databases.QueryManagers;
-using USC.GISResearchLab.Common.Core.Databases;
-using USC.GISResearchLab.Common.Databases.SchemaManagers;
-
-
 using TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.ApplicationStates.Managers;
-using USC.GISResearchLab.Common.Core.Databases.BulkCopys;
 //using USC.GISResearchLab.AddressProcessing.Core.Standardizing.StandardizedAddresses.Lines.LastLines;
 
 using TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayouts.Interfaces;
+using USC.GISResearchLab.Common.Core.Databases;
 using USC.GISResearchLab.Common.Databases.ImportStatusManagers;
+using USC.GISResearchLab.Common.Databases.QueryManagers;
+using USC.GISResearchLab.Common.Databases.SchemaManagers;
+using USC.GISResearchLab.Common.Diagnostics.TraceEvents;
 
 
 
@@ -57,7 +42,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
         #region Properties
 
         public IImportStatusManager StatusManager { get; set; }
-        public TransactionManager TransactionManager{ get; set; }
+        public TransactionManager TransactionManager { get; set; }
         public bool Restart { get; set; }
 
         public bool ShouldRemoveOutputRecordsTableFirst { get; set; }
@@ -135,7 +120,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
         //public abstract void UpdateRecordsCompletedCount(int completed);
         //public abstract void UpdateRecordsCompletedCount(int completed, int total);
         //public abstract void RecordsRead(int completed, int total);
-    
+
         public bool Run(DoWorkEventArgs e, string topDirectory, bool restart)
         {
 

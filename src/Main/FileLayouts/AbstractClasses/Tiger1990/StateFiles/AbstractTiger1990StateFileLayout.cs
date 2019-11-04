@@ -8,7 +8,7 @@ using USC.GISResearchLab.Common.Utils.Files;
 
 namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayouts.AbstractClasses.Tiger1990.StateFiles
 {
-    public abstract class AbstractTiger1990StateFileLayout: AbstractTiger1990FileLayout
+    public abstract class AbstractTiger1990StateFileLayout : AbstractTiger1990FileLayout
     {
 
         public AbstractTiger1990StateFileLayout(string tableName)
@@ -113,7 +113,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayou
 
             try
             {
-               
+
                 if (FileUtils.FileExists(zipFileLocation))
                 {
                     string now = DateTime.Now.Millisecond.ToString();

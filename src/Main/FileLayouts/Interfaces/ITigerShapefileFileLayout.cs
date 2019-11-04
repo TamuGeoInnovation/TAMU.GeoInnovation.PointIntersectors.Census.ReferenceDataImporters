@@ -15,14 +15,14 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayou
 
         #endregion
 
-        
+
         void shapeFile_ShapefileRecordRead(int numberOfRecordsRead);
-        
+
         void shapeFile_ShapeRecordConverted(int numberOfRecordsComputed);
-        
+
         void shapeFile_PercentRead(double percentRead);
 
         void shapeFile_RecordsRead(int recordsRead, int totalRecords);
-        
+
     }
 }

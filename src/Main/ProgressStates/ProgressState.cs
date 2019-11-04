@@ -25,7 +25,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
     {
         #region Properties
 
-        
+
 
 
         public string CurrentFile { get; set; }

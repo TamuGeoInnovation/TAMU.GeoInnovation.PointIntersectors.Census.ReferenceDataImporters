@@ -16,44 +16,21 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel;
-using System.Data.SqlClient;
-using System.Collections;
 using System.Data;
+using System.Data.SqlClient;
 using System.Diagnostics;
-using System.IO;
-
-using ICSharpCode.SharpZipLib.Zip;
-
-using USC.GISResearchLab.Common.Utils.Directories;
-using USC.GISResearchLab.Common.Utils.Strings;
-using USC.GISResearchLab.Common.Utils.Files;
-using USC.GISResearchLab.Common.Diagnostics.TraceEvents;
-using USC.GISResearchLab.Common.Databases;
-using USC.GISResearchLab.Common.Census;
-using USC.GISResearchLab.Common.Utils.Databases;
-using USC.GISResearchLab.Common.Databases.QueryManagers;
-using USC.GISResearchLab.Common.Core.Databases;
-using USC.GISResearchLab.Common.Databases.SchemaManagers;
-using USC.GISResearchLab.Common.Core.Databases.BulkCopys;
-//using USC.GISResearchLab.AddressProcessing.Core.Standardizing.StandardizedAddresses.Lines.LastLines;
-using USC.GISResearchLab.Common.Threading.ProgressStates;
-using USC.GISResearchLab.Common.Census.Tiger2010.FileLayouts.CountryFiles.AbstractClasses;
-using USC.GISResearchLab.Common.Census.Tiger2015.FileLayouts.CountryFiles.AbstractClasses;
-
-using TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayouts.Interfaces;
-using USC.GISResearchLab.Common.Databases.ImportStatusManagers;
-
-using USC.GISResearchLab.Common.Census.Tiger2010.FileLayouts.AbstractClasses;
-using USC.GISResearchLab.Common.Census.Tiger2015.FileLayouts.AbstractClasses;
-using USC.GISResearchLab.Common.Census.Tiger2010.FileLayouts.CountryFiles.Implementations;
-using USC.GISResearchLab.Common.Census.Tiger2015.FileLayouts.CountryFiles.Implementations;
 using TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayouts.Factories.Tiger2000.CountryFiles;
 using TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayouts.Factories.Tiger2010.CountryFiles;
 using TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayouts.Factories.Tiger2015.CountryFiles;
-using TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayouts.AbstractClasses;
+//using USC.GISResearchLab.AddressProcessing.Core.Standardizing.StandardizedAddresses.Lines.LastLines;
+using TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayouts.Interfaces;
+using USC.GISResearchLab.Common.Core.Databases;
+using USC.GISResearchLab.Common.Core.Databases.BulkCopys;
+using USC.GISResearchLab.Common.Databases.ImportStatusManagers;
+using USC.GISResearchLab.Common.Databases.QueryManagers;
+using USC.GISResearchLab.Common.Databases.SchemaManagers;
+using USC.GISResearchLab.Common.Diagnostics.TraceEvents;
 using USC.GISResearchLab.Common.Shapefiles.ShapefileReaders;
 
 namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
@@ -84,11 +61,11 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
         public bool ShouldDoMetDiv2015 { get; set; }
         public bool ShouldDoCbsa2010 { get; set; }
         public bool ShouldDoCbsa2015 { get; set; }
-        
-       
+
+
         #endregion
 
-        public AbstractCountryLevelImporterWorker() : base() 
+        public AbstractCountryLevelImporterWorker() : base()
         {
             ProgressState = new CountryLevelImporterProgressState();
         }
@@ -99,7 +76,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
             ProgressState = new CountryLevelImporterProgressState();
         }
 
-        
+
         public override void UpdateRecordsCompletedCount(int completed)
         {
             ProgressState.ProgressStateRecords.Completed = completed;
@@ -237,7 +214,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
 
                 if (ShouldDoCounties2000)
                 {
-                    ITigerFileLayout tigerFile =  County2000FileFactory.GetFile(QueryManager, "us");
+                    ITigerFileLayout tigerFile = County2000FileFactory.GetFile(QueryManager, "us");
                     ImportTigerNationFile(topDirectory, tigerFile);
                     if (!BackgroundWorker.CancellationPending)
                     {
@@ -251,7 +228,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
 
                 if (ShouldDoZcta32000)
                 {
-                    ITigerFileLayout tigerFile =  Zcta32000FileFactory.GetFile(QueryManager, "us");
+                    ITigerFileLayout tigerFile = Zcta32000FileFactory.GetFile(QueryManager, "us");
                     ImportTigerNationFile(topDirectory, tigerFile);
                     if (!BackgroundWorker.CancellationPending)
                     {
@@ -265,7 +242,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
 
                 if (ShouldDoZcta52000)
                 {
-                    ITigerFileLayout tigerFile =  Zcta52000FileFactory.GetFile(QueryManager, "us");
+                    ITigerFileLayout tigerFile = Zcta52000FileFactory.GetFile(QueryManager, "us");
                     ImportTigerNationFile(topDirectory, tigerFile);
                     if (!BackgroundWorker.CancellationPending)
                     {
@@ -279,7 +256,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
 
                 if (ShouldDoStates2008)
                 {
-                    ITigerFileLayout tigerFile =  States2000FileFactory.GetStates2000File(QueryManager, "us");
+                    ITigerFileLayout tigerFile = States2000FileFactory.GetStates2000File(QueryManager, "us");
                     ImportTigerNationFile(topDirectory, tigerFile);
                     if (!BackgroundWorker.CancellationPending)
                     {
@@ -293,7 +270,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
 
                 if (ShouldDoCounties2008)
                 {
-                    ITigerFileLayout tigerFile =  County2000FileFactory.GetFile(QueryManager, "us");
+                    ITigerFileLayout tigerFile = County2000FileFactory.GetFile(QueryManager, "us");
                     ImportTigerNationFile(topDirectory, tigerFile);
                     if (!BackgroundWorker.CancellationPending)
                     {
@@ -307,7 +284,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
 
                 if (ShouldDoZcta32008)
                 {
-                    ITigerFileLayout tigerFile =  Zcta32000FileFactory.GetFile(QueryManager, "us");
+                    ITigerFileLayout tigerFile = Zcta32000FileFactory.GetFile(QueryManager, "us");
                     ImportTigerNationFile(topDirectory, tigerFile);
                     if (!BackgroundWorker.CancellationPending)
                     {
@@ -321,7 +298,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
 
                 if (ShouldDoZcta52008)
                 {
-                    ITigerFileLayout tigerFile =  Zcta52000FileFactory.GetFile(QueryManager, "us");
+                    ITigerFileLayout tigerFile = Zcta52000FileFactory.GetFile(QueryManager, "us");
                     ImportTigerNationFile(topDirectory, tigerFile);
                     if (!BackgroundWorker.CancellationPending)
                     {
@@ -335,8 +312,8 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
 
                 if (ShouldDoStates2010)
                 {
-                    ITigerFileLayout tigerFile =  States2010FileFactory.GetFile(QueryManager, "us");
-                    
+                    ITigerFileLayout tigerFile = States2010FileFactory.GetFile(QueryManager, "us");
+
                     if (ShouldUseUnzippedFolder)
                     {
                         ImportTiger2010NationFile(UnzippedFolder, tigerFile, ShouldUseUnzippedFolder, ShouldSkipExistingRecords);
@@ -379,11 +356,11 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                     {
                         CreateIndex(tigerFile.OutputTableName, tigerFile.SQLCreateTableIndexes);
                     }
-                } 
+                }
 
                 if (ShouldDoCounties2010)
                 {
-                    ITigerFileLayout tigerFile =  County2010FileFactory.GetFile(QueryManager, "us");
+                    ITigerFileLayout tigerFile = County2010FileFactory.GetFile(QueryManager, "us");
 
                     if (ShouldUseUnzippedFolder)
                     {
@@ -402,11 +379,11 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                     {
                         CreateIndex(tigerFile.OutputTableName, tigerFile.SQLCreateTableIndexes);
                     }
-                }                
+                }
 
                 if (ShouldDoZcta52010)
                 {
-                    ITigerFileLayout tigerFile =  Zcta52010FileFactory.GetFile(QueryManager, "us");
+                    ITigerFileLayout tigerFile = Zcta52010FileFactory.GetFile(QueryManager, "us");
 
                     if (ShouldUseUnzippedFolder)
                     {
@@ -429,7 +406,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
 
                 if (ShouldDoMetDiv2010)
                 {
-                    ITigerFileLayout tigerFile =  MetDiv2010FileFactory.GetFile(QueryManager, "us");
+                    ITigerFileLayout tigerFile = MetDiv2010FileFactory.GetFile(QueryManager, "us");
 
                     if (ShouldUseUnzippedFolder)
                     {
@@ -452,7 +429,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
 
                 if (ShouldDoCbsa2010)
                 {
-                    ITigerFileLayout tigerFile =  Cbsa2010FileFactory.GetFile(QueryManager, "us");
+                    ITigerFileLayout tigerFile = Cbsa2010FileFactory.GetFile(QueryManager, "us");
 
                     if (ShouldUseUnzippedFolder)
                     {
@@ -608,7 +585,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
             return ret;
         }
 
-        public bool ImportTiger2010NationFile(string nationDirectory, ITigerFileLayout tigerFile,  bool shouldUseUnzippedFolder, bool shouldSkipExistingRecords)
+        public bool ImportTiger2010NationFile(string nationDirectory, ITigerFileLayout tigerFile, bool shouldUseUnzippedFolder, bool shouldSkipExistingRecords)
         {
             bool ret = false;
             IDataReader dataReader = null;
@@ -662,7 +639,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
                             try
                             {
 
-                               
+
                                 TraceSource.TraceEvent(TraceEventType.Information, (int)ProcessEvents.Completing, " -- Copy to Server: " + tigerFile.FileName + " (" + DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss") + ")");
 
                                 ProgressState.ProgressStateFiles.Current = tigerFile.FileName;
@@ -739,7 +716,7 @@ namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers
             }
             return ret;
         }
-        
+
 
         public void CreateNationTigerTables(bool dropFirst)
         {

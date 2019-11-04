@@ -16,46 +16,19 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel;
-using System.Data.SqlClient;
-using System.Collections;
 using System.Data;
+using System.Data.SqlClient;
 using System.Diagnostics;
-using System.IO;
-
-using ICSharpCode.SharpZipLib.Zip;
-
-using USC.GISResearchLab.Common.Utils.Directories;
-using USC.GISResearchLab.Common.Utils.Strings;
-using USC.GISResearchLab.Common.Utils.Files;
-using USC.GISResearchLab.Common.Diagnostics.TraceEvents;
-using USC.GISResearchLab.Common.Databases;
-using USC.GISResearchLab.Common.Census;
-using USC.GISResearchLab.Common.Utils.Databases;
-using USC.GISResearchLab.Common.Databases.QueryManagers;
-using USC.GISResearchLab.Common.Core.Databases;
-using USC.GISResearchLab.Common.Databases.SchemaManagers;
-
-
-using TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.ApplicationStates.Managers;
-using USC.GISResearchLab.Common.Core.Databases.BulkCopys;
-using USC.GISResearchLab.AddressProcessing.Core.Standardizing.StandardizedAddresses.Lines.LastLines;
-
-using TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayouts.Interfaces;
-
-
-
-
-using USC.GISResearchLab.Common.Threading.ProgressStates;
-using USC.GISResearchLab.Common.Census.Tiger2010.FileLayouts.AbstractClasses;
-using USC.GISResearchLab.Common.Census.Tiger2010.FileLayouts.CountryFiles.Implementations;
-using USC.GISResearchLab.Common.Census.Tiger2010.FileLayouts.CountryFiles.AbstractClasses;
-using TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayouts.AbstractClasses.Tiger2000;
 using TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayouts.Factories.Tiger2000.CountryFiles;
 using TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayouts.Factories.Tiger2010.CountryFiles;
+using TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.FileLayouts.Interfaces;
+using USC.GISResearchLab.Common.Census.Tiger2010.FileLayouts.CountryFiles.AbstractClasses;
+using USC.GISResearchLab.Common.Core.Databases.BulkCopys;
 using USC.GISResearchLab.Common.Databases.ImportStatusManagers;
+using USC.GISResearchLab.Common.Databases.QueryManagers;
+using USC.GISResearchLab.Common.Databases.SchemaManagers;
+using USC.GISResearchLab.Common.Diagnostics.TraceEvents;
 using USC.GISResearchLab.Common.Shapefiles.ShapefileReaders;
 
 namespace TAMU.GeoInnovation.Applications.Census.ReferenceDataImporter.Workers

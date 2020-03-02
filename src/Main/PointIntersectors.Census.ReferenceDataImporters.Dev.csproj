@@ -85,9 +85,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Catfood.Shapefile">
-      <HintPath>..\..\libs\Catfood.Shapefile.dll</HintPath>
-    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\..\libs\ICSharpCode.SharpZipLib.dll</HintPath>
       <Private>False</Private>
@@ -104,11 +101,6 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Management" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Services" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -224,11 +216,6 @@
       <Name>AddressProcessing.Core.Dev</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Common.Census\src\Main\Common.Census.Dev.csproj">
-      <Project>{5903BD53-EBAF-4E15-AE63-59430DBBA17F}</Project>
-      <Name>Common.Census.Dev</Name>
-      <Private>False</Private>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Common.Core.Files\Src\Main\Common.Core.Files.Dev.csproj">
       <Project>{0FF43F5C-9E8B-4010-A805-8C54EF43E511}</Project>
       <Name>Common.Core.Files.Dev</Name>
@@ -255,11 +242,6 @@
     <ProjectReference Include="..\..\..\GeoReferences.DataImporters.Census\src\Main\GeoReferences.DataImporters.Census.Dev.csproj">
       <Project>{AADA01CF-196D-486E-A14C-6126698AD0DE}</Project>
       <Name>GeoReferences.DataImporters.Census.Dev</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\PointIntersectors.Census\src\Main\PointIntersectors.Census.Dev.csproj">
-      <Project>{5328FADB-9D7C-410A-877E-F03E08367D9C}</Project>
-      <Name>PointIntersectors.Census.Dev</Name>
       <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\..\..\ShapefileReaders.Catfood.ShapefileReaderWrapper\src\Main\ShapefileReaders.Catfood.ShapefileReaderWrapper.Dev.csproj">
